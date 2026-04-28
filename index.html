@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GyM Automotores | Tu próximo auto está acá</title>
+<meta name="description" content="Concesionaria GyM Automotores en Villa Bosch. Compra, venta, financiación, gestoría y seguros. Atención personalizada y vehículos seleccionados." />
+<meta name="theme-color" content="#0a0a0a" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="GyM Automotores | Tu próximo auto está acá" />
+<meta property="og:description" content="Compra, venta, financiación, gestoría y seguros. Todo en un solo lugar." />
+<meta property="og:type" content="website" />
+
+<!-- Fuentes -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
+
+<style>
+  /* =========================================================
+     RESET & BASE
+     ========================================================= */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-0: #050507;
+    --bg-1: #0a0a0d;
+    --bg-2: #101015;
+    --bg-3: #16161d;
+    --surface: rgba(255, 255, 255, 0.03);
+    --surface-hover: rgba(255, 255, 255, 0.06);
+    --border: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.14);
+
+    --text: #f5f5f7;
+    --text-soft: #b8b8c2;
+    --text-mute: #6b6b78;
+
+    --blue: #00a8ff;
+    --blue-bright: #38bdff;
+    --blue-deep: #0066cc;
+    --blue-glow: rgba(0, 168, 255, 0.45);
+    --blue-glow-soft: rgba(0, 168, 255, 0.15);
+
+    --green-wa: #25D366;
+    --green-wa-dark: #128C7E;
+
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 22px;
+
+    --container: 1180px;
+    --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: var(--bg-0);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body::before {
+    /* Carbon-fiber-ish ambient grain layer over the whole page */
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(-45deg, rgba(0,0,0,0.18) 0 1px, transparent 1px 3px);
+    opacity: 0.6;
+    z-index: 1;
+    mix-blend-mode: overlay;
+  }
+
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+  ::selection { background: var(--blue); color: #fff; }
+
+  /* =========================================================
+     TYPOGRAPHY
+     ========================================================= */
+  h1, h2, h3, h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: var(--text);
+  }
+  .display { font-size: clamp(2.6rem, 6.5vw, 5.4rem); font-weight: 900; letter-spacing: -0.035em; }
+  .h1 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
+  .h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  .eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--blue);
+    box-shadow: 0 0 8px var(--blue-glow);
+  }
+  .lead { color: var(--text-soft); font-size: clamp(1rem, 1.5vw, 1.15rem); line-height: 1.6; max-width: 60ch; }
+
+  /* =========================================================
+     LAYOUT HELPERS
+     ========================================================= */
+  .container {
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+  }
+  section { position: relative; z-index: 2; }
+  .section-pad { padding: clamp(64px, 10vw, 130px) 0; }
+
+  /* =========================================================
+     NAVBAR
+     ========================================================= */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 0;
+    transition: all 0.4s var(--ease);
+  }
+  .nav.scrolled {
+    background: rgba(10, 10, 13, 0.78);
+    backdrop-filter: saturate(150%) blur(18px);
+    -webkit-backdrop-filter: saturate(150%) blur(18px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+  }
+  .nav-logo-mark {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #1a1a22, #050505);
+    display: grid; place-items: center;
+    font-family: 'Montserrat', cursive;
+    font-style: italic;
+    font-weight: 900;
+    color: #fff;
+    border: 1px solid rgba(0, 168, 255, 0.35);
+    box-shadow: 0 0 20px rgba(0, 168, 255, 0.25), inset 0 0 12px rgba(0, 168, 255, 0.15);
+    font-size: 1rem;
+  }
+  .nav-logo-text small {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.62rem;
+    color: var(--blue-bright);
+    letter-spacing: 0.32em;
+    margin-top: -2px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+  }
+  .nav-links a {
+    color: var(--text-soft);
+    transition: color 0.25s;
+    position: relative;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -6px;
+    width: 0; height: 1px;
+    background: var(--blue);
+    transition: width 0.3s var(--ease);
+    box-shadow: 0 0 6px var(--blue);
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--blue);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.88rem;
+    transition: all 0.25s;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 8px 24px -8px var(--blue-glow);
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 12px 30px -6px var(--blue-glow); }
+  @media (max-width: 880px) {
+    .nav-links { display: none; }
+  }
+
+  /* =========================================================
+     HERO
+     ========================================================= */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-top: 100px;
+    padding-bottom: 60px;
+    isolation: isolate;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 40%, rgba(0, 168, 255, 0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 10% 80%, rgba(0, 102, 204, 0.12) 0%, transparent 55%),
+      linear-gradient(180deg, #08080b 0%, #050507 100%);
+  }
+
+  /* Carbon-fiber pattern */
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg,
+        rgba(255,255,255,0.025) 0 2px,
+        transparent 2px 4px),
+      repeating-linear-gradient(-45deg,
+        rgba(0,0,0,0.4) 0 2px,
+        transparent 2px 4px);
+    opacity: 0.5;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  }
+
+  /* Floating glow orbs */
+  .glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: -1;
+    animation: floatOrb 14s ease-in-out infinite;
+  }
+  .glow-orb.o1 { top: 15%; right: 10%; width: 380px; height: 380px; background: rgba(0, 168, 255, 0.35); }
+  .glow-orb.o2 { bottom: 10%; left: -8%; width: 280px; height: 280px; background: rgba(0, 102, 204, 0.28); animation-delay: -7s; }
+
+  @keyframes floatOrb {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(-30px, 40px) scale(1.08); }
+  }
+
+  /* Diagonal speed lines */
+  .speed-lines {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0.5;
+  }
+  .speed-line {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue) 50%, transparent);
+    box-shadow: 0 0 8px var(--blue);
+    transform-origin: left center;
+    animation: dash 5s linear infinite;
+  }
+  .speed-line:nth-child(1) { top: 22%; left: -10%; width: 240px; transform: rotate(-8deg); animation-delay: 0s; }
+  .speed-line:nth-child(2) { top: 55%; right: -10%; width: 180px; transform: rotate(8deg); animation-delay: -1.5s; }
+  .speed-line:nth-child(3) { top: 75%; left: 30%; width: 200px; transform: rotate(-4deg); animation-delay: -3s; }
+
+  @keyframes dash {
+    0% { opacity: 0; transform: translateX(-50%) rotate(var(--r, 0)); }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; transform: translateX(50%) rotate(var(--r, 0)); }
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  @media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .hero-content { position: relative; }
+  .hero-content > * { animation: rise 0.9s var(--ease) backwards; }
+  .hero-content > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.18s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.30s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.42s; }
+  .hero-content > *:nth-child(5) { animation-delay: 0.54s; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-title {
+    margin: 22px 0 20px;
+  }
+  .hero-title .accent {
+    background: linear-gradient(90deg, var(--blue-bright) 0%, var(--blue) 50%, var(--blue-deep) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+    display: inline-block;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 32px;
+    margin: 30px 0 36px;
+    padding: 18px 22px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(8px);
+  }
+  .hero-meta-item {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.85rem;
+    color: var(--text-soft);
+  }
+  .hero-meta-item svg { width: 18px; height: 18px; color: var(--blue-bright); flex-shrink: 0; }
+
+  .hero-cta-row {
+    display: flex; gap: 14px; flex-wrap: wrap;
+  }
+
+  /* Buttons */
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 28px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.93rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: var(--radius-sm);
+    transition: all 0.3s var(--ease);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .btn svg { width: 18px; height: 18px; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--blue-bright) 0%, var(--blue) 50%, var(--blue-deep) 100%);
+    color: #fff;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 12px 32px -8px var(--blue-glow), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.15), 0 18px 40px -6px var(--blue-glow);
+  }
+  .btn-primary::before {
+    content: ''; position: absolute; inset: 0; border-radius: inherit;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s var(--ease);
+  }
+  .btn-primary:hover::before { transform: translateX(100%); }
+  .btn-secondary {
+    background: rgba(255,255,255,0.04);
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    backdrop-filter: blur(8px);
+  }
+  .btn-secondary:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(0, 168, 255, 0.4);
+    color: var(--blue-bright);
+    transform: translateY(-2px);
+  }
+  .btn-wa {
+    background: var(--green-wa);
+    color: #fff;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 12px 30px -8px rgba(37, 211, 102, 0.45);
+  }
+  .btn-wa:hover {
+    background: #1ebe5a;
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.15), 0 18px 36px -6px rgba(37, 211, 102, 0.55);
+  }
+
+  /* Hero visual side */
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: linear-gradient(135deg, #0e0e14 0%, #050505 100%);
+    border: 1px solid var(--border);
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.6), 0 0 60px -10px var(--blue-glow-soft);
+  }
+  .hero-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.5) 100%);
+    pointer-events: none;
+  }
+  .hero-visual img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s var(--ease);
+  }
+  .hero-visual:hover img { transform: scale(1.04); }
+
+  .hero-stat-card {
+    position: absolute;
+    z-index: 3;
+    background: rgba(15, 15, 20, 0.85);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    animation: rise 1s var(--ease) 0.7s backwards;
+  }
+  .hero-stat-card.tl { top: 24px; left: 24px; }
+  .hero-stat-card.br { bottom: 24px; right: 24px; }
+  .hero-stat-num {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.6rem;
+    line-height: 1;
+    color: var(--blue-bright);
+    text-shadow: 0 0 20px var(--blue-glow);
+  }
+  .hero-stat-label {
+    font-size: 0.7rem;
+    color: var(--text-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-top: 4px;
+  }
+
+  /* Scroll indicator */
+  .scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-mute);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: rise 1s var(--ease) 1s backwards;
+  }
+  .scroll-hint .line {
+    width: 1px; height: 40px;
+    background: linear-gradient(180deg, var(--blue), transparent);
+    position: relative;
+    overflow: hidden;
+  }
+  .scroll-hint .line::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 30%;
+    background: var(--blue-bright);
+    box-shadow: 0 0 8px var(--blue);
+    animation: scrollDot 2.4s ease-in-out infinite;
+  }
+  @keyframes scrollDot {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(133%); }
+  }
+  @media (max-width: 700px) { .scroll-hint { display: none; } }
+
+  /* =========================================================
+     SERVICES
+     ========================================================= */
+  .services {
+    background: linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 100%);
+    position: relative;
+  }
+  .section-header {
+    max-width: 760px;
+    margin: 0 auto 60px;
+    text-align: center;
+  }
+  .section-header h2 { margin: 18px 0 14px; }
+  .section-header.left { margin-left: 0; text-align: left; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+  }
+  @media (max-width: 980px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .services-grid { grid-template-columns: 1fr; } }
+
+  .service-card {
+    position: relative;
+    padding: 32px 26px 30px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition: all 0.4s var(--ease);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, transparent 40%, var(--blue) 50%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    z-index: -1;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 1px;
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    background: linear-gradient(180deg, rgba(0, 168, 255, 0.04), rgba(255,255,255,0.01));
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4), 0 0 30px -10px var(--blue-glow-soft);
+  }
+  .service-card:hover::before { opacity: 0.6; }
+
+  .service-icon {
+    width: 52px; height: 52px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(0, 168, 255, 0.15), rgba(0, 168, 255, 0.04));
+    border: 1px solid rgba(0, 168, 255, 0.25);
+    display: grid; place-items: center;
+    color: var(--blue-bright);
+    margin-bottom: 22px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 0 16px rgba(0, 168, 255, 0.12);
+    transition: all 0.3s;
+  }
+  .service-card:hover .service-icon {
+    background: linear-gradient(135deg, rgba(0, 168, 255, 0.25), rgba(0, 168, 255, 0.08));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 0 24px var(--blue-glow);
+    transform: scale(1.05);
+  }
+  .service-icon svg { width: 26px; height: 26px; }
+
+  .service-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .service-card p {
+    color: var(--text-soft);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+  .service-num {
+    position: absolute;
+    top: 22px; right: 24px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 0.75rem;
+    color: var(--text-mute);
+    letter-spacing: 0.1em;
+  }
+
+  /* =========================================================
+     VEHICLES
+     ========================================================= */
+  .vehicles { background: var(--bg-1); position: relative; }
+  .vehicles::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0, 168, 255, 0.06), transparent 60%);
+    pointer-events: none;
+  }
+
+  .section-head-row {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+  }
+  .section-head-row > div { max-width: 560px; }
+  .section-head-row h2 { margin: 14px 0 10px; }
+
+  .filter-pills {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+  .pill {
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    color: var(--text-soft);
+    font-size: 0.83rem;
+    font-weight: 500;
+    transition: all 0.25s;
+    cursor: pointer;
+  }
+  .pill:hover { color: var(--text); border-color: var(--border-strong); }
+  .pill.active {
+    background: var(--blue);
+    color: #fff;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 4px 14px -2px var(--blue-glow);
+  }
+
+  .vehicles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 960px) { .vehicles-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .vehicles-grid { grid-template-columns: 1fr; } }
+
+  .vehicle-card {
+    background: linear-gradient(180deg, var(--bg-2), var(--bg-1));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: all 0.4s var(--ease);
+    display: flex;
+    flex-direction: column;
+  }
+  .vehicle-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 168, 255, 0.3);
+    box-shadow: 0 24px 48px -16px rgba(0,0,0,0.5), 0 0 40px -10px var(--blue-glow-soft);
+  }
+
+  .vehicle-img {
+    aspect-ratio: 4 / 3;
+    background: #000;
+    overflow: hidden;
+    position: relative;
+  }
+  .vehicle-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--ease);
+  }
+  .vehicle-card:hover .vehicle-img img { transform: scale(1.05); }
+  .vehicle-tag {
+    position: absolute;
+    top: 14px; left: 14px;
+    padding: 5px 11px;
+    background: rgba(0, 168, 255, 0.15);
+    border: 1px solid rgba(0, 168, 255, 0.4);
+    backdrop-filter: blur(8px);
+    color: var(--blue-bright);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: 6px;
+  }
+  .vehicle-tag.financed {
+    background: rgba(37, 211, 102, 0.12);
+    border-color: rgba(37, 211, 102, 0.4);
+    color: #4ade80;
+  }
+
+  .vehicle-body {
+    padding: 22px 22px 22px;
+    display: flex; flex-direction: column;
+    flex: 1;
+  }
+  .vehicle-meta-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .vehicle-year {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--blue-bright);
+    letter-spacing: 0.18em;
+  }
+  .vehicle-km {
+    font-size: 0.78rem;
+    color: var(--text-mute);
+  }
+  .vehicle-name {
+    font-size: 1.08rem;
+    margin: 4px 0 14px;
+    line-height: 1.25;
+  }
+  .vehicle-specs {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-bottom: 18px;
+  }
+  .spec {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.74rem;
+    color: var(--text-soft);
+  }
+  .spec svg { width: 13px; height: 13px; color: var(--blue-bright); }
+
+  .vehicle-cta {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 18px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border-strong);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transition: all 0.3s;
+  }
+  .vehicle-cta svg { width: 16px; height: 16px; color: var(--green-wa); transition: transform 0.3s; }
+  .vehicle-card:hover .vehicle-cta {
+    background: var(--green-wa);
+    border-color: var(--green-wa);
+    color: #fff;
+  }
+  .vehicle-card:hover .vehicle-cta svg { color: #fff; transform: translateX(2px); }
+
+  .stock-note {
+    text-align: center;
+    margin-top: 36px;
+    color: var(--text-mute);
+    font-size: 0.86rem;
+  }
+  .stock-note a {
+    color: var(--blue-bright);
+    text-decoration: underline;
+    text-decoration-color: rgba(0, 168, 255, 0.3);
+    text-underline-offset: 4px;
+  }
+
+  /* =========================================================
+     WHY US
+     ========================================================= */
+  .whyus {
+    background: var(--bg-0);
+    position: relative;
+    overflow: hidden;
+  }
+  .whyus::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--blue-glow-soft), transparent 70%);
+    filter: blur(80px);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 80px;
+    align-items: start;
+  }
+  @media (max-width: 980px) {
+    .why-grid { grid-template-columns: 1fr; gap: 50px; }
+  }
+
+  .why-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .why-item {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 22px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .why-item:hover { padding-left: 12px; }
+  .why-item:last-child { border-bottom: none; }
+
+  .why-num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--blue);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-shadow: 0 0 10px var(--blue-glow-soft);
+  }
+
+  .why-content h3 {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .why-content p {
+    color: var(--text-soft);
+    font-size: 0.93rem;
+    line-height: 1.6;
+  }
+
+  .why-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 36px;
+  }
+  .stat-card {
+    padding: 24px 20px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    text-align: left;
+  }
+  .stat-num {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 2.4rem;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--blue-bright), var(--blue-deep));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .stat-num small {
+    font-size: 1rem;
+    background: linear-gradient(135deg, var(--blue-bright), var(--blue-deep));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .stat-label {
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+
+  /* =========================================================
+     CTA BIG
+     ========================================================= */
+  .cta-big {
+    padding: clamp(60px, 10vw, 110px) 0;
+    background: var(--bg-0);
+    position: relative;
+  }
+  .cta-box {
+    position: relative;
+    padding: clamp(50px, 8vw, 90px) clamp(28px, 5vw, 70px);
+    background:
+      radial-gradient(ellipse 70% 80% at 30% 30%, rgba(0, 168, 255, 0.18), transparent 60%),
+      linear-gradient(135deg, #0a1929 0%, #050a14 100%);
+    border: 1px solid rgba(0, 168, 255, 0.25);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    text-align: center;
+    isolation: isolate;
+  }
+  .cta-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 4px),
+      repeating-linear-gradient(-45deg, rgba(0,0,0,0.3) 0 2px, transparent 2px 4px);
+    opacity: 0.5;
+    z-index: -1;
+  }
+  .cta-box::after {
+    content: '';
+    position: absolute;
+    bottom: -40%; left: 50%;
+    transform: translateX(-50%);
+    width: 80%; height: 200px;
+    background: radial-gradient(ellipse, var(--blue-glow), transparent 70%);
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: -1;
+  }
+  .cta-box h2 {
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
+    margin-bottom: 18px;
+    letter-spacing: -0.03em;
+  }
+  .cta-box p {
+    color: var(--text-soft);
+    max-width: 540px;
+    margin: 0 auto 36px;
+    font-size: 1.05rem;
+  }
+  .cta-row {
+    display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  }
+
+  /* =========================================================
+     LOCATION
+     ========================================================= */
+  .location { background: var(--bg-1); }
+  .loc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 36px;
+    align-items: stretch;
+  }
+  @media (max-width: 880px) {
+    .loc-grid { grid-template-columns: 1fr; }
+  }
+
+  .loc-info {
+    padding: 38px 32px;
+    background: linear-gradient(180deg, var(--bg-2), var(--bg-1));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+  }
+  .loc-info h2 { margin: 14px 0 18px; font-size: 1.8rem; }
+  .loc-block { padding: 18px 0; border-bottom: 1px solid var(--border); }
+  .loc-block:last-of-type { border-bottom: none; }
+  .loc-label {
+    font-size: 0.7rem;
+    color: var(--blue-bright);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .loc-value { font-size: 0.98rem; color: var(--text); }
+  .loc-value.muted { color: var(--text-soft); font-size: 0.92rem; line-height: 1.7; }
+
+  .loc-cta {
+    margin-top: 24px;
+  }
+
+  .map-wrap {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: #000;
+    position: relative;
+    min-height: 420px;
+    display: flex;
+  }
+  .map-wrap iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    border: 0;
+    filter: invert(0.92) hue-rotate(180deg) saturate(0.6);
+  }
+
+  /* =========================================================
+     FOOTER
+     ========================================================= */
+  footer {
+    background: var(--bg-0);
+    border-top: 1px solid var(--border);
+    padding: 60px 0 24px;
+    position: relative;
+    z-index: 2;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 50px;
+  }
+  @media (max-width: 880px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+  }
+  @media (max-width: 540px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+
+  .footer-brand p {
+    color: var(--text-soft);
+    font-size: 0.88rem;
+    margin-top: 16px;
+    line-height: 1.6;
+    max-width: 320px;
+  }
+  .footer-col h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 18px;
+    font-weight: 700;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 10px; }
+  .footer-col a {
+    color: var(--text-soft);
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--blue-bright); }
+  .footer-col p {
+    color: var(--text-soft);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .footer-social {
+    display: flex; gap: 10px;
+    margin-top: 20px;
+  }
+  .social-btn {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    display: grid; place-items: center;
+    color: var(--text-soft);
+    transition: all 0.25s;
+  }
+  .social-btn:hover {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  .social-btn svg { width: 16px; height: 16px; }
+
+  .footer-bottom {
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    color: var(--text-mute);
+    font-size: 0.8rem;
+  }
+  .footer-bottom a { color: var(--text-mute); transition: color 0.2s; }
+  .footer-bottom a:hover { color: var(--blue-bright); }
+
+  /* =========================================================
+     FLOATING WHATSAPP
+     ========================================================= */
+  .wa-float {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    width: 60px; height: 60px;
+    background: var(--green-wa);
+    color: #fff;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    box-shadow: 0 10px 28px -4px rgba(37, 211, 102, 0.55), 0 0 0 0 rgba(37, 211, 102, 0.5);
+    z-index: 99;
+    transition: transform 0.3s var(--ease);
+    animation: waPulse 2.4s infinite;
+  }
+  .wa-float:hover { transform: scale(1.08); }
+  .wa-float svg { width: 30px; height: 30px; }
+  @keyframes waPulse {
+    0% { box-shadow: 0 10px 28px -4px rgba(37, 211, 102, 0.55), 0 0 0 0 rgba(37, 211, 102, 0.5); }
+    70% { box-shadow: 0 10px 28px -4px rgba(37, 211, 102, 0.55), 0 0 0 18px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 10px 28px -4px rgba(37, 211, 102, 0.55), 0 0 0 0 rgba(37, 211, 102, 0); }
+  }
+
+  /* =========================================================
+     SCROLL REVEAL
+     ========================================================= */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+    will-change: opacity, transform;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  }
+  .reveal-stagger.in > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.05s; }
+  .reveal-stagger.in > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.15s; }
+  .reveal-stagger.in > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.25s; }
+  .reveal-stagger.in > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.35s; }
+  .reveal-stagger.in > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.45s; }
+  .reveal-stagger.in > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.55s; }
+
+  /* Mobile padding tweaks */
+  @media (max-width: 540px) {
+    .container { padding: 0 18px; }
+    .hero-stat-card { padding: 10px 14px; }
+    .hero-stat-num { font-size: 1.3rem; }
+    .hero-stat-label { font-size: 0.62rem; }
+    .btn { padding: 14px 22px; font-size: 0.85rem; }
+    .wa-float { width: 56px; height: 56px; bottom: 18px; right: 18px; }
+    .wa-float svg { width: 26px; height: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================== NAVBAR ======================== -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="nav-logo" aria-label="GyM Automotores">
+      <span class="nav-logo-mark">GyM</span>
+      <span class="nav-logo-text">
+        AUTOMOTORES
+        <small>VILLA BOSCH</small>
+      </span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#vehiculos">Vehículos</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <a href="https://wa.me/5491136379305?text=Hola%2C%20vi%20la%20web%20y%20quiero%20consultar%20por%20un%20veh%C3%ADculo" target="_blank" rel="noopener" class="nav-cta">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.6 6.32A8.4 8.4 0 0 0 3.46 15.6L3 20l4.5-1.18a8.4 8.4 0 0 0 4.04 1.03h.01a8.4 8.4 0 0 0 6-14.53Zm-6 12.92a7 7 0 0 1-3.56-.97l-.26-.15-2.66.7.71-2.6-.17-.27a7 7 0 1 1 5.94 3.29ZM15.43 13.5c-.21-.1-1.24-.6-1.43-.67-.19-.07-.33-.1-.47.1s-.54.67-.66.81c-.12.13-.24.15-.45.05a5.7 5.7 0 0 1-2.86-2.5c-.22-.37.21-.34.62-1.14a.39.39 0 0 0-.02-.36c-.05-.1-.47-1.13-.64-1.55-.17-.41-.34-.36-.47-.36h-.4c-.13 0-.36.05-.55.26-.19.21-.72.7-.72 1.7s.74 1.97.84 2.1c.1.13 1.45 2.22 3.51 3.11.49.21.87.34 1.17.43.49.16.94.13 1.29.08.4-.06 1.24-.5 1.41-1 .18-.49.18-.92.13-1-.06-.1-.2-.15-.41-.26Z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</nav>
+
+<!-- ======================== HERO ======================== -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="glow-orb o1"></div>
+  <div class="glow-orb o2"></div>
+  <div class="speed-lines">
+    <span class="speed-line"></span>
+    <span class="speed-line"></span>
+    <span class="speed-line"></span>
+  </div>
+
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <span class="eyebrow">Concesionaria · Villa Bosch</span>
+        <h1 class="display hero-title">
+          Tu próximo<br/>auto está <span class="accent">acá.</span>
+        </h1>
+        <p class="lead">
+          Compra, venta, financiación, gestoría y seguros — todo en un solo lugar.
+          Asesoramiento personalizado y vehículos cuidadosamente seleccionados.
+        </p>
+
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Atención personalizada
+          </div>
+          <div class="hero-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            Gestión rápida
+          </div>
+          <div class="hero-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.4 9.5 8 11 4.6-1.5 8-6 8-11V5l-8-3z"/></svg>
+            Compra segura
+          </div>
+        </div>
+
+        <div class="hero-cta-row">
+          <a href="#vehiculos" class="btn btn-primary">
+            Ver vehículos
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="https://wa.me/5491136379305?text=Hola%2C%20vi%20la%20web%20y%20quiero%20consultar%20por%20un%20veh%C3%ADculo" target="_blank" rel="noopener" class="btn btn-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A8.4 8.4 0 0 0 3.46 15.6L3 20l4.5-1.18a8.4 8.4 0 0 0 4.04 1.03h.01a8.4 8.4 0 0 0 6-14.53Zm-6 12.92a7 7 0 0 1-3.56-.97l-.26-.15-2.66.7.71-2.6-.17-.27a7 7 0 1 1 5.94 3.29ZM15.43 13.5c-.21-.1-1.24-.6-1.43-.67-.19-.07-.33-.1-.47.1s-.54.67-.66.81c-.12.13-.24.15-.45.05a5.7 5.7 0 0 1-2.86-2.5c-.22-.37.21-.34.62-1.14a.39.39 0 0 0-.02-.36c-.05-.1-.47-1.13-.64-1.55-.17-.41-.34-.36-.47-.36h-.4c-.13 0-.36.05-.55.26-.19.21-.72.7-.72 1.7s.74 1.97.84 2.1c.1.13 1.45 2.22 3.51 3.11.49.21.87.34 1.17.43.49.16.94.13 1.29.08.4-.06 1.24-.5 1.41-1 .18-.49.18-.92.13-1-.06-.1-.2-.15-.41-.26Z"/></svg>
+            Hablar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=900&q=80" alt="Vehículo destacado GyM Automotores" loading="eager" />
+        <div class="hero-stat-card tl">
+          <div class="hero-stat-num">+15</div>
+          <div class="hero-stat-label">Años de experiencia</div>
+        </div>
+        <div class="hero-stat-card br">
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">Atención personalizada</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <span class="line"></span>
+  </div>
+</section>
+
+<!-- ======================== SERVICIOS ======================== -->
+<section class="services section-pad" id="servicios">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Servicios integrales</span>
+      <h2 class="h1">Todo lo que necesitás,<br/>en un solo lugar.</h2>
+      <p class="lead" style="margin: 16px auto 0;">
+        No vendemos solo autos. Acompañamos cada paso del proceso para que la operación sea rápida, segura y transparente.
+      </p>
+    </div>
+
+    <div class="services-grid reveal-stagger">
+      <div class="service-card">
+        <span class="service-num">01</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>
+        </div>
+        <h3>Compra y venta</h3>
+        <p>Vehículos seleccionados con garantía de procedencia. También compramos tu auto con la mejor cotización del mercado.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">02</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3>Financiación</h3>
+        <p>Planes accesibles y préstamos prendarios. Te armamos el plan que mejor se adapte a tu situación.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">03</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><path d="M9 13h6M9 17h4"/></svg>
+        </div>
+        <h3>Gestoría</h3>
+        <p>Trámites de transferencia, cédula azul/verde, formularios 08 y todo lo que necesitás resuelto sin moverte.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">04</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <h3>Seguros generales</h3>
+        <p>Cobertura para tu auto y patrimonio. Comparamos compañías para que pagues menos por más cobertura.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== VEHICULOS ======================== -->
+<section class="vehicles section-pad" id="vehiculos">
+  <div class="container">
+    <div class="section-head-row">
+      <div class="reveal">
+        <span class="eyebrow">Stock disponible</span>
+        <h2 class="h1">Vehículos destacados.</h2>
+        <p class="lead">Una selección de unidades verificadas listas para entregar. Consultá por la unidad que te interese y te respondemos al instante.</p>
+      </div>
+      <a href="https://wa.me/5491136379305?text=Hola%2C%20quiero%20ver%20todo%20el%20stock%20disponible" target="_blank" rel="noopener" class="btn btn-secondary">
+        Ver stock completo
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="filter-pills reveal">
+      <button class="pill active">Todos</button>
+      <button class="pill">SUV</button>
+      <button class="pill">Sedán</button>
+      <button class="pill">Pick-up</button>
+      <button class="pill">Hatchback</button>
+      <button class="pill">Financiación</button>
+    </div>
+
+    <div class="vehicles-grid reveal-stagger">
+
+      <a href="https://wa.me/5491136379305?text=Hola%2C%20me%20interesa%20la%20Toyota%20Hilux%20SRX%202022.%20%C2%BFEst%C3%A1%20disponible%3F" target="_blank" rel="noopener" class="vehicle-card">
+        <div class="vehicle-img">
+          <span class="vehicle-tag financed">Financiación</span>
+          <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800&q=80" alt="Toyota Hilux SRX 2022" loading="lazy"/>
+        </div>
+        <div class="vehicle-body">
+          <div class="vehicle-meta-row">
+            <span class="vehicle-year">2022</span>
+            <span class="vehicle-km">68.000 km</span>
+          </div>
+          <h3 class="vehicle-name">Toyota Hilux SRX 4x4</h3>
+          <div class="vehicle-specs">
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M7 6h10l3 6v6H4v-6l3-6z"/></svg> Pick-up</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg> 4x4</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h18M5 8v10h14V8M9 4h6v4H9z"/></svg> Diésel</span>
+          </div>
+          <div class="vehicle-cta">
+            Consultar
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A8.4 8.4 0 0 0 3.46 15.6L3 20l4.5-1.18a8.4 8.4 0 0 0 4.04 1.03h.01a8.4 8.4 0 0 0 6-14.53Zm-6 12.92a7 7 0 0 1-3.56-.97l-.26-.15-2.66.7.71-2.6-.17-.27a7 7 0 1 1 5.94 3.29ZM15.43 13.5c-.21-.1-1.24-.6-1.43-.67-.19-.07-.33-.1-.47.1s-.54.67-.66.81c-.12.13-.24.15-.45.05a5.7 5.7 0 0 1-2.86-2.5c-.22-.37.21-.34.62-1.14a.39.39 0 0 0-.02-.36c-.05-.1-.47-1.13-.64-1.55-.17-.41-.34-.36-.47-.36h-.4c-.13 0-.36.05-.55.26-.19.21-.72.7-.72 1.7s.74 1.97.84 2.1c.1.13 1.45 2.22 3.51 3.11.49.21.87.34 1.17.43.49.16.94.13 1.29.08.4-.06 1.24-.5 1.41-1 .18-.49.18-.92.13-1-.06-.1-.2-.15-.41-.26Z"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://wa.me/5491136379305?text=Hola%2C%20me%20interesa%20el%20Volkswagen%20Amarok%20V6%202021.%20%C2%BFEst%C3%A1%20disponible%3F" target="_blank" rel="noopener" class="vehicle-card">
+        <div class="vehicle-img">
+          <span class="vehicle-tag">Destacado</span>
+          <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?w=800&q=80" alt="Volkswagen Amarok V6 2021" loading="lazy"/>
+        </div>
+        <div class="vehicle-body">
+          <div class="vehicle-meta-row">
+            <span class="vehicle-year">2021</span>
+            <span class="vehicle-km">82.500 km</span>
+          </div>
+          <h3 class="vehicle-name">Volkswagen Amarok V6</h3>
+          <div class="vehicle-specs">
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M7 6h10l3 6v6H4v-6l3-6z"/></svg> Pick-up</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg> 4x4</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Automática</span>
+          </div>
+          <div class="vehicle-cta">
+            Consultar
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A8.4 8.4 0 0 0 3.46 15.6L3 20l4.5-1.18a8.4 8.4 0 0 0 4.04 1.03h.01a8.4 8.4 0 0 0 6-14.53Zm-6 12.92a7 7 0 0 1-3.56-.97l-.26-.15-2.66.7.71-2.6-.17-.27a7 7 0 1 1 5.94 3.29ZM15.43 13.5c-.21-.1-1.24-.6-1.43-.67-.19-.07-.33-.1-.47.1s-.54.67-.66.81c-.12.13-.24.15-.45.05a5.7 5.7 0 0 1-2.86-2.5c-.22-.37.21-.34.62-1.14a.39.39 0 0 0-.02-.36c-.05-.1-.47-1.13-.64-1.55-.17-.41-.34-.36-.47-.36h-.4c-.13 0-.36.05-.55.26-.19.21-.72.7-.72 1.7s.74 1.97.84 2.1c.1.13 1.45 2.22 3.51 3.11.49.21.87.34 1.17.43.49.16.94.13 1.29.08.4-.06 1.24-.5 1.41-1 .18-.49.18-.92.13-1-.06-.1-.2-.15-.41-.26Z"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://wa.me/5491136379305?text=Hola%2C%20me%20interesa%20el%20Toyota%20Corolla%20XEi%202023.%20%C2%BFEst%C3%A1%20disponible%3F" target="_blank" rel="noopener" class="vehicle-card">
+        <div class="vehicle-img">
+          <span class="vehicle-tag financed">Financiación</span>
+          <img src="https://images.unsplash.com/photo-1623013438264-d4adc1727b39?w=800&q=80" alt="Toyota Corolla XEi 2023" loading="lazy"/>
+        </div>
+        <div class="vehicle-body">
+          <div class="vehicle-meta-row">
+            <span class="vehicle-year">2023</span>
+            <span class="vehicle-km">28.000 km</span>
+          </div>
+          <h3 class="vehicle-name">Toyota Corolla XEi CVT</h3>
+          <div class="vehicle-specs">
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M7 6h10l3 6v6H4v-6l3-6z"/></svg> Sedán</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Automática</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h18M5 8v10h14V8M9 4h6v4H9z"/></svg> Nafta</span>
+          </div>
+          <div class="vehicle-cta">
+            Consultar
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A8.4 8.4 0 0 0 3.46 15.6L3 20l4.5-1.18a8.4 8.4 0 0 0 4.04 1.03h.01a8.4 8.4 0 0 0 6-14.53Zm-6 12.92a7 7 0 0 1-3.56-.97l-.26-.15-2.66.7.71-2.6-.17-.27a7 7 0 1 1 5.94 3.29ZM15.43 13.5c-.21-.1-1.24-.6-1.43-.67-.19-.07-.33-.1-.47.1s-.54.67-.66.81c-.12.13-.24.15-.45.05a5.7 5.7 0 0 1-2.86-2.5c-.22-.37.21-.34.62-1.14a.39.39 0 0 0-.02-.36c-.05-.1-.47-1.13-.64-1.55-.17-.41-.34-.36-.47-.36h-.4c-.13 0-.36.05-.55.26-.19.21-.72.7-.72 1.7s.74 1.97.84 2.1c.1.13 1.45 2.22 3.51 3.11.49.21.87.34 1.17.43.49.16.94.13 1.29.08.4-.06 1.24-.5 1.41-1 .18-.49.18-.92.13-1-.06-.1-.2-.15-.41-.26Z"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://wa.me/5491136379305?text=Hola%2C%20me%20interesa%20el%20Chevrolet%20Tracker%20Premier%202022.%20%C2%BFEst%C3%A1%20disponible%3F" target="_blank" rel="noopener" class="vehicle-card">
+        <div class="vehicle-img">
+          <span class="vehicle-tag">Recién ingresado</span>
+          <img src="https://images.unsplash.com/photo-1568844293986-8d0400bd4745?w=800&q=80" alt="Chevrolet Tracker Premier 2022" loading="lazy"/>
+        </div>
+        <div class="vehicle-body">
+          <div class="vehicle-meta-row">
+            <span class="vehicle-year">2022</span>
+            <span class="vehicle-km">42.000 km</span>
+          </div>
+          <h3 class="vehicle-name">Chevrolet Tracker Premier</h3>
+          <div class="vehicle-specs">
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M7 6h10l3 6v6H4v-6l3-6z"/></svg> SUV</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Automática</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h18M5 8v10h14V8M9 4h6v4H9z"/></svg> Turbo</span>
+          </div>
+          <div class="vehicle-cta">
+            Consultar
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A8.4 8.4 0 0 0 3.46 15.6L3 20l4.5-1.18a8.4 8.4 0 0 0 4.04 1.03h.01a8.4 8.4 0 0 0 6-14.53Zm-6 12.92a7 7 0 0 1-3.56-.97l-.26-.15-2.66.7.71-2.6-.17-.27a7 7 0 1 1 5.94 3.29ZM15.43 13.5c-.21-.1-1.24-.6-1.43-.67-.19-.07-.33-.1-.47.1s-.54.67-.66.81c-.12.13-.24.15-.45.05a5.7 5.7 0 0 1-2.86-2.5c-.22-.37.21-.34.62-1.14a.39.39 0 0 0-.02-.36c-.05-.1-.47-1.13-.64-1.55-.17-.41-.34-.36-.47-.36h-.4c-.13 0-.36.05-.55.26-.19.21-.72.7-.72 1.7s.74 1.97.84 2.1c.1.13 1.45 2.22 3.51 3.11.49.21.87.34 1.17.43.49.16.94.13 1.29.08.4-.06 1.24-.5 1.41-1 .18-.49.18-.92.13-1-.06-.1-.2-.15-.41-.26Z"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://wa.me/5491136379305?text=Hola%2C%20me%20interesa%20el%20Ford%20Ranger%20XLT%202023.%20%C2%BFEst%C3%A1%20disponible%3F" target="_blank" rel="noopener" class="vehicle-card">
+        <div class="vehicle-img">
+          <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=80" alt="Ford Ranger XLT 2023" loading="lazy"/>
+        </div>
+        <div class="vehicle-body">
+          <div class="vehicle-meta-row">
+            <span class="vehicle-year">2023</span>
+            <span class="vehicle-km">55.000 km</span>
+          </div>
+          <h3 class="vehicle-name">Ford Ranger XLT 4x4</h3>
+          <div class="vehicle-specs">
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M7 6h10l3 6v6H4v-6l3-6z"/></svg> Pick-up</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg> 4x4</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h18M5 8v10h14V8M9 4h6v4H9z"/></svg> Diésel</span>
+          </div>
+          <div class="vehicle-cta">
+            Consultar
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A8.4 8.4 0 0 0 3.46 15.6L3 20l4.5-1.18a8.4 8.4 0 0 0 4.04 1.03h.01a8.4 8.4 0 0 0 6-14.53Zm-6 12.92a7 7 0 0 1-3.56-.97l-.26-.15-2.66.7.71-2.6-.17-.27a7 7 0 1 1 5.94 3.29ZM15.43 13.5c-.21-.1-1.24-.6-1.43-.67-.19-.07-.33-.1-.47.1s-.54.67-.66.81c-.12.13-.24.15-.45.05a5.7 5.7 0 0 1-2.86-2.5c-.22-.37.21-.34.62-1.14a.39.39 0 0 0-.02-.36c-.05-.1-.47-1.13-.64-1.55-.17-.41-.34-.36-.47-.36h-.4c-.13 0-.36.05-.55.26-.19.21-.72.7-.72 1.7s.74 1.97.84 2.1c.1.13 1.45 2.22 3.51 3.11.49.21.87.34 1.17.43.49.16.94.13 1.29.08.4-.06 1.24-.5 1.41-1 .18-.49.18-.92.13-1-.06-.1-.2-.15-.41-.26Z"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://wa.me/5491136379305?text=Hola%2C%20me%20interesa%20el%20Renault%20Duster%20Iconic%202023.%20%C2%BFEst%C3%A1%20disponible%3F" target="_blank" rel="noopener" class="vehicle-card">
+        <div class="vehicle-img">
+          <span class="vehicle-tag financed">Financiación</span>
+          <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800&q=80" alt="Renault Duster Iconic 2023" loading="lazy"/>
+        </div>
+        <div class="vehicle-body">
+          <div class="vehicle-meta-row">
+            <span class="vehicle-year">2023</span>
+            <span class="vehicle-km">31.500 km</span>
+          </div>
+          <h3 class="vehicle-name">Renault Duster Iconic</h3>
+          <div class="vehicle-specs">
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M7 6h10l3 6v6H4v-6l3-6z"/></svg> SUV</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Manual</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h18M5 8v10h14V8M9 4h6v4H9z"/></svg> Nafta</span>
+          </div>
+          <div class="vehicle-cta">
+            Consultar
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A8.4 8.4 0 0 0 3.46 15.6L3 20l4.5-1.18a8.4 8.4 0 0 0 4.04 1.03h.01a8.4 8.4 0 0 0 6-14.53Zm-6 12.92a7 7 0 0 1-3.56-.97l-.26-.15-2.66.7.71-2.6-.17-.27a7 7 0 1 1 5.94 3.29ZM15.43 13.5c-.21-.1-1.24-.6-1.43-.67-.19-.07-.33-.1-.47.1s-.54.67-.66.81c-.12.13-.24.15-.45.05a5.7 5.7 0 0 1-2.86-2.5c-.22-.37.21-.34.62-1.14a.39.39 0 0 0-.02-.36c-.05-.1-.47-1.13-.64-1.55-.17-.41-.34-.36-.47-.36h-.4c-.13 0-.36.05-.55.26-.19.21-.72.7-.72 1.7s.74 1.97.84 2.1c.1.13 1.45 2.22 3.51 3.11.49.21.87.34 1.17.43.49.16.94.13 1.29.08.4-.06 1.24-.5 1.41-1 .18-.49.18-.92.13-1-.06-.1-.2-.15-.41-.26Z"/></svg>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <p class="stock-note">
+      ¿No encontraste lo que buscás? <a href="https://wa.me/5491136379305?text=Hola%2C%20busco%20un%20veh%C3%ADculo%20espec%C3%ADfico" target="_blank" rel="noopener">Contanos qué buscás</a> y te lo conseguimos.
+    </p>
+  </div>
+</section>
+
+<!-- ======================== WHY US ======================== -->
+<section class="whyus section-pad" id="nosotros">
+  <div class="container">
+    <div class="why-grid">
+      <div class="reveal">
+        <span class="eyebrow">Por qué GyM</span>
+        <h2 class="h1" style="margin: 16px 0 22px;">Más que una concesionaria — un equipo que te acompaña.</h2>
+        <p class="lead">
+          Llevamos años construyendo confianza en cada operación. Nuestro objetivo es simple: que el proceso de cambiar tu auto sea claro, rápido y sin sorpresas.
+        </p>
+
+        <div class="why-stats">
+          <div class="stat-card">
+            <div class="stat-num">+15<small>años</small></div>
+            <div class="stat-label">de experiencia en el mercado automotor</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">100<small>%</small></div>
+            <div class="stat-label">de las unidades verificadas técnica y legalmente</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">3<small> en 1</small></div>
+            <div class="stat-label">vehículo + financiación + gestoría sin moverte</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">24<small>hs</small></div>
+            <div class="stat-label">respuesta promedio por WhatsApp y redes</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-list reveal-stagger">
+        <div class="why-item">
+          <span class="why-num">01</span>
+          <div class="why-content">
+            <h3>Atención personalizada</h3>
+            <p>No sos un número. Cada cliente trabaja directo con uno de nuestros asesores, que te acompaña desde la primera consulta hasta la entrega de llaves.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <span class="why-num">02</span>
+          <div class="why-content">
+            <h3>Amplia variedad de vehículos</h3>
+            <p>Desde autos compactos para la ciudad hasta pick-ups 4x4 y SUVs. Si no tenemos lo que buscás, lo conseguimos.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <span class="why-num">03</span>
+          <div class="why-content">
+            <h3>Financiación accesible</h3>
+            <p>Trabajamos con bancos y financieras para armarte un plan a tu medida. Pre-aprobación rápida y condiciones claras desde el primer momento.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <span class="why-num">04</span>
+          <div class="why-content">
+            <h3>Gestión rápida y segura</h3>
+            <p>Resolvemos toda la documentación: transferencias, formularios 08, cédulas y verificaciones. Vos te llevás el auto, nosotros nos ocupamos del resto.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <span class="why-num">05</span>
+          <div class="why-content">
+            <h3>Confianza, transparencia y compromiso</h3>
+            <p>Tres palabras que no son sólo un slogan. Cada operación se cierra con la documentación completa y la tranquilidad de tratar con profesionales del rubro.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== CTA BIG ======================== -->
+<section class="cta-big">
+  <div class="container">
+    <div class="cta-box reveal">
+      <span class="eyebrow" style="justify-content: center; display: flex;">Estamos para ayudarte</span>
+      <h2 style="margin-top: 16px;">¿Listo para cambiar tu auto?</h2>
+      <p>Contanos qué estás buscando y te respondemos en minutos. Sin compromiso, sin presión — sólo asesoramiento real.</p>
+      <div class="cta-row">
+        <a href="https://wa.me/5491136379305?text=Hola%2C%20quiero%20cambiar%20mi%20auto.%20%C2%BFPodemos%20conversar%3F" target="_blank" rel="noopener" class="btn btn-wa">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A8.4 8.4 0 0 0 3.46 15.6L3 20l4.5-1.18a8.4 8.4 0 0 0 4.04 1.03h.01a8.4 8.4 0 0 0 6-14.53Zm-6 12.92a7 7 0 0 1-3.56-.97l-.26-.15-2.66.7.71-2.6-.17-.27a7 7 0 1 1 5.94 3.29ZM15.43 13.5c-.21-.1-1.24-.6-1.43-.67-.19-.07-.33-.1-.47.1s-.54.67-.66.81c-.12.13-.24.15-.45.05a5.7 5.7 0 0 1-2.86-2.5c-.22-.37.21-.34.62-1.14a.39.39 0 0 0-.02-.36c-.05-.1-.47-1.13-.64-1.55-.17-.41-.34-.36-.47-.36h-.4c-.13 0-.36.05-.55.26-.19.21-.72.7-.72 1.7s.74 1.97.84 2.1c.1.13 1.45 2.22 3.51 3.11.49.21.87.34 1.17.43.49.16.94.13 1.29.08.4-.06 1.24-.5 1.41-1 .18-.49.18-.92.13-1-.06-.1-.2-.15-.41-.26Z"/></svg>
+          Hablar por WhatsApp ahora
+        </a>
+        <a href="#contacto" class="btn btn-secondary">Cómo llegar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== LOCATION ======================== -->
+<section class="location section-pad" id="contacto">
+  <div class="container">
+    <div class="section-header reveal" style="text-align: left; margin: 0 0 50px;">
+      <span class="eyebrow">Visitanos</span>
+      <h2 class="h1">Te esperamos en Villa Bosch.</h2>
+    </div>
+
+    <div class="loc-grid">
+      <div class="loc-info reveal">
+        <h2 style="font-family: 'Montserrat'; font-weight: 800;">GyM Automotores</h2>
+
+        <div class="loc-block">
+          <div class="loc-label">Dirección</div>
+          <div class="loc-value">Av. Triunvirato 6392<br/>Villa Bosch, Buenos Aires</div>
+        </div>
+
+        <div class="loc-block">
+          <div class="loc-label">Horarios</div>
+          <div class="loc-value muted">
+            Lunes a Viernes — 9:00 a 13:00 / 15:00 a 18:30<br/>
+            Sábados — 9:00 a 13:00
+          </div>
+        </div>
+
+        <div class="loc-block">
+          <div class="loc-label">Contacto</div>
+          <div class="loc-value muted">
+            Mauro · 11 3637-9305<br/>
+            Gustavo · 11 4992-4317<br/>
+            Mariano · 11 6999-8343
+          </div>
+        </div>
+
+        <div class="loc-cta">
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Av.+Triunvirato+6392,+Villa+Bosch" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%;">
+            Cómo llegar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="map-wrap reveal">
+        <iframe
+          src="https://www.google.com/maps?q=Av.%20Triunvirato%206392%2C%20Villa%20Bosch&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Ubicación GyM Automotores"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== FOOTER ======================== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="nav-logo">
+          <span class="nav-logo-mark">GyM</span>
+          <span class="nav-logo-text">
+            AUTOMOTORES
+            <small>VILLA BOSCH</small>
+          </span>
+        </a>
+        <p>Concesionaria multimarca con servicios integrales. Compra, venta, financiación, gestoría y seguros — todo bajo el mismo techo.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com/gymautomotores" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://tiktok.com/@gymautomotores" target="_blank" rel="noopener" class="social-btn" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.59a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.02z"/></svg>
+          </a>
+          <a href="https://wa.me/5491136379305" target="_blank" rel="noopener" class="social-btn" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A8.4 8.4 0 0 0 3.46 15.6L3 20l4.5-1.18a8.4 8.4 0 0 0 4.04 1.03h.01a8.4 8.4 0 0 0 6-14.53Zm-6 12.92a7 7 0 0 1-3.56-.97l-.26-.15-2.66.7.71-2.6-.17-.27a7 7 0 1 1 5.94 3.29ZM15.43 13.5c-.21-.1-1.24-.6-1.43-.67-.19-.07-.33-.1-.47.1s-.54.67-.66.81c-.12.13-.24.15-.45.05a5.7 5.7 0 0 1-2.86-2.5c-.22-.37.21-.34.62-1.14a.39.39 0 0 0-.02-.36c-.05-.1-.47-1.13-.64-1.55-.17-.41-.34-.36-.47-.36h-.4c-.13 0-.36.05-.55.26-.19.21-.72.7-.72 1.7s.74 1.97.84 2.1c.1.13 1.45 2.22 3.51 3.11.49.21.87.34 1.17.43.49.16.94.13 1.29.08.4-.06 1.24-.5 1.41-1 .18-.49.18-.92.13-1-.06-.1-.2-.15-.41-.26Z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#servicios">Compra y venta</a></li>
+          <li><a href="#servicios">Financiación</a></li>
+          <li><a href="#servicios">Gestoría</a></li>
+          <li><a href="#servicios">Seguros</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#vehiculos">Vehículos</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="#top">Inicio</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <p>
+          Av. Triunvirato 6392<br/>
+          Villa Bosch · BA<br/><br/>
+          Lu a Vie: 9 a 13 / 15 a 18:30<br/>
+          Sáb: 9 a 13
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> GyM Automotores · Todos los derechos reservados.</span>
+      <span>Confianza · Transparencia · Compromiso</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/5491136379305?text=Hola%2C%20vi%20la%20web%20y%20quiero%20consultar%20por%20un%20veh%C3%ADculo" target="_blank" rel="noopener" class="wa-float" aria-label="Chatear por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A8.4 8.4 0 0 0 3.46 15.6L3 20l4.5-1.18a8.4 8.4 0 0 0 4.04 1.03h.01a8.4 8.4 0 0 0 6-14.53Zm-6 12.92a7 7 0 0 1-3.56-.97l-.26-.15-2.66.7.71-2.6-.17-.27a7 7 0 1 1 5.94 3.29ZM15.43 13.5c-.21-.1-1.24-.6-1.43-.67-.19-.07-.33-.1-.47.1s-.54.67-.66.81c-.12.13-.24.15-.45.05a5.7 5.7 0 0 1-2.86-2.5c-.22-.37.21-.34.62-1.14a.39.39 0 0 0-.02-.36c-.05-.1-.47-1.13-.64-1.55-.17-.41-.34-.36-.47-.36h-.4c-.13 0-.36.05-.55.26-.19.21-.72.7-.72 1.7s.74 1.97.84 2.1c.1.13 1.45 2.22 3.51 3.11.49.21.87.34 1.17.43.49.16.94.13 1.29.08.4-.06 1.24-.5 1.41-1 .18-.49.18-.92.13-1-.06-.1-.2-.15-.41-.26Z"/></svg>
+</a>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Sticky nav
+  const nav = document.getElementById('nav');
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 24);
+    lastScroll = y;
+  }, { passive: true });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => io.observe(el));
+
+  // Filter pills (visual feedback only on demo)
+  document.querySelectorAll('.pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+    });
+  });
+
+  // Smooth anchor scrolling for in-page links
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
